@@ -1,0 +1,27 @@
+.movies {
+  background-color: #202020;
+}
+
+.movies__wrapper {
+  margin: 0 auto;
+  padding: 70px 30px 30px;
+  max-width: 1140px;
+}
+
+@media screen and (max-width: 1279px) {
+  .movies__wrapper {
+    padding: 80px 30px 20px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .movies__wrapper {
+    padding: 80px 30px 20px;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .movies__wrapper {
+    padding: 80px 10px 20px;
+  }
+}

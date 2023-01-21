@@ -1,0 +1,60 @@
+.profile {
+  background-color: #202020;
+  min-height:100vh;
+}
+
+.profile__wrapper {
+  margin: 0 auto;
+  padding: 75px 0 70px;
+  max-width: 410px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.profile__title {
+  text-align: center;
+  margin: 0 0 123px 0;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 29px;
+}
+
+.underline_grey {
+  margin: 0;
+}
+
+.profile__place {
+  display: flex;
+  line-height: 46px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.profile__text {
+  margin: 0;
+}
+
+.profile__name {
+  margin: 0;
+}
+
+.profile__email {
+  margin: 0;
+}
+
+.profile__edit {
+  display: block;
+  margin-top: 220px;
+  text-decoration: none;
+  text-align: center;
+  color: #FFF;
+}
+
+.profile__signout {
+  display: block;
+  margin-top: 16px;
+  text-decoration: none;
+  text-align: center;
+  color: #EE3465;
+}

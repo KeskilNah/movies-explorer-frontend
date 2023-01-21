@@ -1,0 +1,49 @@
+@import url(../../vendor/normalize.css);
+@import url(../../vendor/fonts.css);
+
+.App {
+  color: #FFFFFF;
+  height: 100%;
+  font-family: "Inter", Helvetica, sans-serif;
+}
+
+.page__wrapper {
+  margin: 0 auto;
+}
+
+.underline_white {
+  padding: 1px 0 0 0; 
+  background-color: #DADADA;
+  margin: 23px 0 0 0;
+}
+
+.underline_grey {
+  padding: 1px 0 0 0; 
+  background-color: #8B8B8B;
+  margin: 23px 0 0 0;
+}
+
+.section-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 27px;
+}
+
+@media screen and (max-width: 450px) {
+  .section-title {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    font-family: Inter;
+    letter-spacing: -0.04em;
+  }
+
+  .underline_grey {
+    margin: 28px 0 0 0;
+  }
+
+  .underline_white {
+    margin: 28px 0 0 0;
+  }
+}

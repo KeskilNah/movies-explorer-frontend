@@ -1,0 +1,180 @@
+.navigation_logined {
+
+}
+
+.navigation__wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.navigation__main {
+  display: none;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 32px;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.navigation__movies {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 32px;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.navigation__saved-movies {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 32px;
+  color: #FFFFFF;
+  text-decoration: none;
+  margin: 0 0 0 30px;
+}
+
+.navigation__profile {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 32px;
+  color: #FFFFFF;
+  text-decoration: none;
+  margin: 0 0 0 60px;
+  display: flex;
+  align-items: center;
+}
+
+.navigation__profile-pic {
+  display: inline-block;
+  background: url(../../images/icons/icon-profile.svg) no-repeat center;
+  background-color: #313131;
+  border-radius: 50%;
+  height: 26px;
+  width: 26px;
+  margin: 0 0 0 7px;
+  
+}
+
+.navigation__close-button {
+  background: url(../../images/icons/icon-close.svg) no-repeat center;
+  border: none;
+  min-width: 22px;
+  min-height: 22px;
+  padding: 0;
+  display: none;
+}
+
+.navigation__close-button_visible {
+  display: block;
+  position: absolute;
+  top: 23px;
+  right: 23px;
+}
+
+.navigation__burger {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+
+  .navigation__main {
+    display: block;
+  }
+
+  .navigation__burger {
+    margin: 11px 8px;
+    display: block;
+    position: relative;
+    width: 28px;
+    height: 23px;
+  }
+  
+  .navigation__burger-line {
+    position: absolute;
+    background-color: #FFF;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    top: 10px;
+  }
+
+  .navigation__burger:before,
+  .navigation__burger:after {
+    content: '';
+    background-color: #FFF;
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    left: 0;
+  }
+
+  .navigation__burger:before {
+    top: 0;
+  }
+
+  .navigation__burger:after {
+    bottom: 0;
+  }
+
+  .navigation__background {
+    position: fixed;
+    background-color: #000;
+    opacity: 0.3;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    left: 0;
+    top: 0;
+  }
+  .navigation__wrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    flex-direction:column;
+    width: 55%;
+    background-color: #313131;
+    z-index: 4;
+    opacity: 1;
+    display: none;
+    padding: 0px 90px 0px;
+  }
+
+  .navigation__wrapper_opened {
+    display: flex;
+    text-align: center;
+    height: 100%;
+  }
+
+  .navigation__main {
+    padding: 160px 0 0 0;
+    font-size: 18px;
+    margin: 0 0 28px 0;
+  }
+
+  .navigation__movies {
+    font-size: 18px;
+    margin: 0 0 28px 0;
+  }
+
+  .navigation__saved-movies {
+    margin: 0;
+    font-size: 18px;
+    height: 100%;
+  }
+
+  .navigation__profile {
+    margin: 0;
+    font-size: 18px;
+    justify-self: flex-end;
+    padding: 0 0 90px 0;
+  }
+
+  .navigation__profile-pic {
+    margin: 0 0 0 7px;
+  }
+
+  .udnerline {
+    text-decoration: solid underline #FFF 2px;
+    text-underline-offset: 8px
+  }
+}
