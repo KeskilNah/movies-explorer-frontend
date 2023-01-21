@@ -1,6 +1,5 @@
-// import logo from '../../images/logo.svg';
 import './App.css';
-import { Route, Routes, useHistory } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import Profile from '../Profile/Profile';
