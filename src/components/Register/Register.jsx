@@ -6,7 +6,7 @@ export default function Register() {
   return(
   <div className="register">
     <div className="register__wrapper">
-    <a className="register__to-main" href="/"><img src={PicturePath} alt="asd" className="register__logo"/></a>
+    <a className="register__to-main" href="/"><img src={PicturePath} alt="logo" className="register__logo"/></a>
       <h4 className="register__title form-title">
         Добро пожаловать!
       </h4>

@@ -6,7 +6,7 @@ function Header() {
   return(
     <header className="header">
       <div className="header__wrapper">
-        <a href="#AboutProject"><img src={headerLogo} alt="asd" className="header__logo"/></a>
+        <a href="#AboutProject"><img src={headerLogo} alt="logo" className="header__logo"/></a>
         <nav className="header__nav">
           <a href="/signup" className="header__singup">Регистрация</a>
           <a href="/signin" className="header__singin">Войти</a>

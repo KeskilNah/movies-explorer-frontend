@@ -8,7 +8,7 @@ function HeaderLogined() {
   return(
     <header className="header_logined">
       <div className="header__wrapper_logined">
-      <a href="/"><img src={headerLogo} alt="asd" className="header__logo_loggined"/></a>
+      <a href="/"><img src={headerLogo} alt="header-logo" className="header__logo_loggined"/></a>
         <Navigation />
       </div>
     </header>

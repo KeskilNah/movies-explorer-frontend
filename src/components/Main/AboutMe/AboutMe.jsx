@@ -9,7 +9,7 @@ export default function AboutMe() {
         <h2 className="about-me__title section-title">Студент</h2>
         <div className="about-me__line underline_white"></div>
         <div className="about-me__profile">
-          <div className="about-me__avatar-container"><img className="about-me__avatar" src={avatar} alt="" /></div>
+          <div className="about-me__avatar-container"><img className="about-me__avatar" src={avatar} alt="avatar" /></div>
           <div className="about-me__info">
             <h2 className="about-me__name">Виталий</h2>
             <p className="about-me__job">Фронтенд-разработчик, 30 лет</p>
