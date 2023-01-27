@@ -4,7 +4,7 @@ import "./Profile.css"
 
 export default function Profile() {
   return(
-    <div className="profile">
+    <section className="profile">
       <HeaderLogined />
       <div className="profile__wrapper">
         <h4 className="profile__title form-title">
@@ -22,7 +22,7 @@ export default function Profile() {
         <a href="/" className="profile__edit">Редактировать</a>
         <a href="/" className="profile__signout">Выйти из аккаунта</a>
       </div>
-    </div>
+    </section>
   )
 }
 

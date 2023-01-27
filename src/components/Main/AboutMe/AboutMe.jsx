@@ -4,7 +4,7 @@ import avatar from "../../../images/avatar.png"
 
 export default function AboutMe() {
   return(
-    <div className="about-me">
+    <section className="about-me">
       <div className="about-me__wrapper">
         <h2 className="about-me__title section-title">Студент</h2>
         <div className="about-me__line underline_white"></div>
@@ -18,6 +18,6 @@ export default function AboutMe() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   )
 }

@@ -11,6 +11,10 @@
   max-width: 1140px;
 }
 
+.header__logo_loggined:hover {
+  opacity: 80%;
+}
+
 @media screen and (max-width: 768px) {
   .header__wrapper_logined {
     padding: 18px 30px;

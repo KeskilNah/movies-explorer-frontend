@@ -43,6 +43,12 @@
   border-radius: 3px;
   font-size: 12px;
   line-height: 36px;
+  max-width: 130px;
+  max-height: 36px;
+}
+
+.promo__nav:hover {
+  opacity: 80%;
 }
 
 .promo__img {
@@ -86,7 +92,12 @@
   }
 
   .promo__nav {
+    display: block;
     margin: 0 auto;
+
+    text-align: center;
+    padding: 0;
+
   }
 }
 

@@ -51,10 +51,26 @@
   color: #FFF;
 }
 
+.profile__edit:hover {
+  opacity: 80%;
+}
+
 .profile__signout {
   display: block;
   margin-top: 16px;
   text-decoration: none;
   text-align: center;
   color: #EE3465;
+}
+
+.profile__signout:hover {
+  opacity: 80%;
+}
+
+@media screen and (max-width: 450px) {
+  .profile__wrapper {
+    margin: 0 auto;
+    max-width: 260px;
+    padding: 56px 0 30px;
+  }
 }

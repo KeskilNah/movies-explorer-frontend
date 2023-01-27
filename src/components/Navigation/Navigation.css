@@ -16,6 +16,10 @@
   text-decoration: none;
 }
 
+.navigation__main:hover {
+  opacity: 70%;
+}
+
 .navigation__movies {
   font-size: 12px;
   font-weight: 500;
@@ -24,6 +28,11 @@
   text-decoration: none;
 }
 
+.navigation__movies:hover {
+  opacity: 70%;
+}
+
+
 .navigation__saved-movies {
   font-size: 12px;
   font-weight: 500;
@@ -31,6 +40,10 @@
   color: #FFFFFF;
   text-decoration: none;
   margin: 0 0 0 30px;
+}
+
+.navigation__saved-movies:hover {
+  opacity: 70%;
 }
 
 .navigation__profile {
@@ -42,6 +55,10 @@
   margin: 0 0 0 60px;
   display: flex;
   align-items: center;
+}
+
+.navigation__profile:hover {
+  opacity: 70%;
 }
 
 .navigation__profile-pic {

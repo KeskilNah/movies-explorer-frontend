@@ -7,7 +7,7 @@ import { initialCards } from "../../../utils/constants";
 
 function MoviesCardList() {
   return(
-    <div className="movies__card-list">
+    <section className="movies__card-list">
           <ul className="movies__cards">
             {initialCards.map((data) => (
               <MoviesCard 
@@ -20,7 +20,7 @@ function MoviesCardList() {
         <div className="movies__more">
           <button className="movies__more-button">Ещё</button>
         </div>
-    </div>
+    </section>
   )
 }
 

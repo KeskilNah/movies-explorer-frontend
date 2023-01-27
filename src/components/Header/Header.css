@@ -1,5 +1,4 @@
 .header {
-
   background-color: #073042;
 }
 
@@ -10,6 +9,10 @@
   margin: 0 auto;
   padding: 18px 70px;
   max-width: 1140px;
+}
+
+.header__logo:hover {
+  opacity: 80%;
 }
 
 .header__singup {
@@ -26,6 +29,10 @@
   text-align: center;
 }
 
+.header__singup:hover {
+  opacity: 70%;
+}
+
 .header__singin {
   display: inline-block;
   font-size: 12px;
@@ -40,6 +47,10 @@
   text-decoration: none;
   min-width: 76px;
   text-align: center;
+}
+
+.header__singin:hover {
+  opacity: 70%;
 }
 
 @media screen and (max-width: 768px) {

@@ -15,7 +15,6 @@
   margin: 66px 0 0;
 }
 
-
 .about-me__avatar-container{
   max-width: 270px;
   max-height: 327px;
@@ -27,7 +26,6 @@
   width: 100%;
   height: auto;
 }
-
 
 .about-me__info {
   max-width: 600px;
@@ -62,6 +60,9 @@
   font-size: 14px;
 }
 
+.about-me__link:hover {
+  opacity: 70%;
+}
 
 .about-me__image {
   max-width: 29px;

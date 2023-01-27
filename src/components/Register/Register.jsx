@@ -4,7 +4,7 @@ import PicturePath from "../../images/logo__COLOR_main-1.svg"
 
 export default function Register() {
   return(
-  <div className="register">
+  <section className="register">
     <div className="register__wrapper">
     <a className="register__to-main" href="/"><img src={PicturePath} alt="logo" className="register__logo"/></a>
       <h4 className="register__title form-title">
@@ -13,15 +13,12 @@ export default function Register() {
       <form className="register__form">
         <p className="register__text">Имя</p>
         <input className="register__input register__name-input" type="text" defaultValue="Виталий"/>
-        <div className="register__line underline_grey"></div>
         <p className="register__name-error">Что-то пошло не так...</p>
         <p className="register__text">E-mail</p>
         <input className="register__input register__email-input" type="text" />
-        <div className="register__line underline_grey"></div>
         <p className="register__email-error">Что-то пошло не так...</p>
         <p className="register__text">Пароль</p>
         <input className="register__input register__email-input" type="password" />
-        <div className="register__line underline_grey"></div>
         <p className="register__password-error">Что-то пошло не так...</p>
         <button className="register__button">Зарегистрироваться</button>
       </form>
@@ -31,7 +28,7 @@ export default function Register() {
       </div>
 
     </div>
-  </div>
+  </section>
   ) 
     
 }

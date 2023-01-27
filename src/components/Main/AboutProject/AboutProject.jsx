@@ -5,7 +5,7 @@ import "./AboutProject.css";
 
 export default function Promo() {
   return(
-    <div className="about">
+    <section className="about">
       <a name="AboutProject"></a>
       <div className="about__wrapper">
         <h2 className="about__title section-title">О проекте</h2>
@@ -31,6 +31,6 @@ export default function Promo() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   )
 }

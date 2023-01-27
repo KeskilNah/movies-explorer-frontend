@@ -1,29 +1,25 @@
 import React from "react";
 import "./Portfolio.css";
-import icoArrow from "../../../images/arrow.svg"
 
 export default function Portfolio() {
   return(
-    <div className="portfolio">
+    <section className="portfolio">
       <div className="portfolio__wrapper">
         <h4 className="portfolio__title">Портфолио</h4>
         <ul className="portfolio__links">
           <li className="portfolio__link-wrapper">
-            <a href="/" className="portfolio__link portfolio__static">Статичный сайт</a>
-            <img className="portfolio__image" src={icoArrow} alt="Статичный сайт" />
+          <a href="https://keskilnah.github.io/how-to-learn/" className="portfolio__link portfolio__static" target="_blank" rel="noreferrer">Статичный сайт</a>
           </li>
           <div className="portfolio__line underline_grey"></div>
           <li className="portfolio__link-wrapper">
-            <a href="/" className="portfolio__link portfolio__adaptiv">Адаптивный сайт</a>
-            <img className="portfolio__image" src={icoArrow} alt="Адаптивный сайт" />
+          <a href="https://keskilnah.github.io/russian-travel/" className="portfolio__link portfolio__adaptiv" target="_blank" rel="noreferrer">Адаптивный сайт</a>
           </li>
           <div className="portfolio__line underline_grey"></div>
           <li className="portfolio__link-wrapper">
-            <a href="/" className="portfolio__link portfolio__app">Одностраничное приложение</a>
-            <img className="portfolio__image" src={icoArrow} alt="Одностраничное приложение" />
+          <a href="https://keskilnah.github.io/react-mesto-auth/" className="portfolio__link portfolio__app" target="_blank" rel="noreferrer">Одностраничное приложение</a>
           </li>
         </ul>
       </div>
-    </div>
+    </section>
   )
 }
