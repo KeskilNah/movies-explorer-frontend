@@ -6,9 +6,9 @@ import Navigation from "../Navigation/Navigation";
 
 function HeaderLogined() {
   return(
-    <header className="header_logined">
-      <div className="header__wrapper_logined">
-      <a href="/"><img src={headerLogo} alt="header-logo" className="header__logo_loggined"/></a>
+    <header className="header header_logined">
+      <div className="header__wrapper header__wrapper_logined">
+      <a href="/"><img src={headerLogo} alt="header-logo" className="header__logo header__logo_loggined"/></a>
         <Navigation />
       </div>
     </header>

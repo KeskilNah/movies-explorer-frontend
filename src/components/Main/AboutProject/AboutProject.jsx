@@ -9,7 +9,7 @@ export default function Promo() {
       <a name="AboutProject"></a>
       <div className="about__wrapper">
         <h2 className="about__title section-title">О проекте</h2>
-        <div className="about__line underline_white"></div>
+        <div className="about__line underline underline_white"></div>
         <div className="about__columns">
           <div className="about__column first-column">
             <h3 className="about__column-title">Дипломный проект включал 5 этапов</h3>

@@ -12,7 +12,6 @@ function App() {
     <div className="App">
       <div className="page__wrapper">
         <Routes>
-        
           <Route exact path="/" element={<Main />}/>
           <Route path="movies" element={<Movies />}/>
           <Route path="saved-movies" element={<Movies />}/> {/*далее будет изменено в зависимости от сохранённых фильмов*/}

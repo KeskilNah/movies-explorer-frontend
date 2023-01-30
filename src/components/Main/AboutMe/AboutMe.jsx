@@ -7,7 +7,7 @@ export default function AboutMe() {
     <section className="about-me">
       <div className="about-me__wrapper">
         <h2 className="about-me__title section-title">Студент</h2>
-        <div className="about-me__line underline_white"></div>
+        <div className="about-me__line underline underline_white"></div>
         <div className="about-me__profile">
           <div className="about-me__avatar-container"><img className="about-me__avatar" src={avatar} alt="avatar" /></div>
           <div className="about-me__info">

@@ -19,7 +19,7 @@ function SearchForm() {
               </div>
             </form>
           
-        <div className="underline_grey"></div>
+        <div className="underline underline_grey"></div>
       </section>
   )
 }

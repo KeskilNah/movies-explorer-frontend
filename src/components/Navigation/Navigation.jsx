@@ -17,7 +17,7 @@ function handleCloseButton () {
 export default function Navigation() {
   const location = useLocation();
   return(
-    <nav className="navigation_logined">
+    <nav className="navigation navigation_logined">
       <div className="navigation__wrapper">
         <a href="/" className={(location.pathname === "/") ? "udnerline navigation__main": "navigation__main"}>Главная</a>
         <a href="/movies" className={(location.pathname === "/movies") ? "navigation__movies udnerline": "navigation__movies"}>Фильмы</a>
