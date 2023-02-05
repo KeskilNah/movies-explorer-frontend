@@ -1,5 +1,12 @@
 import './App.css';
-import { Route, Routes } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { Route, Routes, useNavigate } from "react-router-dom";
+
+import { CurrentUserContext } from "../../contexts/CurrentUserContext"
+import MainApi from '../../utils/MainApi'
+import mainApi from '../../utils/MainApi';
+import ProtectedRoute from '../../utils/ProtectedRoute';
+
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import Profile from '../Profile/Profile';
@@ -8,19 +15,141 @@ import Register from '../Register/Register';
 import NoPage from '../NoPage/NoPage';
 
 function App() {
+
+  const navigate = useNavigate();
+  const [currentUser, setCurrentUser] = useState({});
+  const [isLoggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    let jwt = localStorage.getItem("jwt");
+    if(jwt) {
+      mainApi.checkToken(jwt)
+      .then((res) => {
+        if (res) {
+          setCurrentUser({
+            id: res._id,
+            name: res.name,
+            email: res.email,
+          });
+          setLoggedIn(true);
+        }
+      })
+      .catch((e) => console.log(`error${e}`));
+    }
+  }, [isLoggedIn, currentUser.name, currentUser.email])
+
+  const handleUpdateUser = (data) => {
+    MainApi.editProfile(data)
+      .then((res) => {
+        setCurrentUser({
+          id: res._id,
+          name: res.name,
+          email: res.email,
+        });
+      })
+      .catch((err) => {
+        console.log(err)
+      }
+      )
+  }
+
+  const handleLoginSubmit = (data) => {
+    mainApi.login(data)
+    .then((res) => {
+      if(res) {
+        localStorage.setItem("jwt", res.token);
+        mainApi.checkToken(res).then((response) => {
+          setCurrentUser({
+            id: response._id,
+            name: response.name,
+            email: response.email,
+          })
+          setLoggedIn(true);
+          navigate("/")
+        })
+      }
+    })
+  .catch((err) => {
+      console.log(err);
+    });
+  }
+
+  const handleRegistrationSubmit = (data) => {
+    mainApi.register(data)
+      .then((res) => {
+        if(res) {
+          navigate("/signin");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  const handleLogoutSubmit = () => {
+    localStorage.setItem("jwt", "");
+    setLoggedIn(false);
+    navigate("/signin")
+  }
+
   return (
     <div className="App">
+      <CurrentUserContext.Provider value={currentUser}>
       <div className="page__wrapper">
         <Routes>
-          <Route exact path="/" element={<Main />}/>
-          <Route path="movies" element={<Movies />}/>
-          <Route path="saved-movies" element={<Movies />}/> {/*далее будет изменено в зависимости от сохранённых фильмов*/}
-          <Route path="profile" element={<Profile />} />
-          <Route path="/signin" element={<Login />} />
-          <Route path="/signup" element={<Register />} />
-          <Route path="*" element={<NoPage />} />
+          <Route 
+            exact path="/" 
+            element={<Main isLoggedIn={isLoggedIn}/>}
+          />
+          <Route
+            path="movies"
+            element={(
+              <ProtectedRoute>
+                <Movies
+                  isLoggedIn={isLoggedIn}
+                  currentUser={currentUser}
+                />
+              </ProtectedRoute>
+            )}
+          />
+          <Route
+            path="saved-movies"
+            element={(
+              <ProtectedRoute>
+              <Movies
+                isLoggedIn={isLoggedIn}
+                currentUser={currentUser}
+              />
+            </ProtectedRoute>
+            )}
+          /> {/*далее будет изменено в зависимости от сохранённых фильмов*/}
+          <Route
+            path="profile"
+            element={(
+              <ProtectedRoute>
+                <Profile
+                  isLoggedIn={isLoggedIn}
+                  onLogout={handleLogoutSubmit}
+                  onProfileEdit={handleUpdateUser}
+                />
+              </ProtectedRoute>
+            )}
+          />
+          <Route
+            path="signin"
+            element={<Login onLoginSubmit={handleLoginSubmit}/>}
+          />
+          <Route
+            path="signup"
+            element={<Register onRegisterSubmit={handleRegistrationSubmit}/>}
+          />
+          <Route
+            path="*"
+            element={<NoPage />}
+          />
         </Routes>
       </div>
+      </CurrentUserContext.Provider>
     </div>
   );
 }

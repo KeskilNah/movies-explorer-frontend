@@ -62,6 +62,11 @@
   margin: 0;
   line-height: 24px;
   visibility: hidden;
+  min-height: 24px;
+}
+
+.register__name-error_visible {
+  visibility: visible;
 }
 
 .register__email-error {
@@ -70,6 +75,11 @@
   margin: 0;
   line-height: 24px;
   visibility: hidden;
+  min-height: 24px;
+}
+
+.register__email-error_visible {
+  visibility: visible;
 }
 
 .register__password-error {
@@ -79,6 +89,11 @@
   line-height: 24px;
   padding-bottom: 135px;
   visibility: hidden;
+  min-height: 24px;
+}
+
+.register__password-error_visible {
+  visibility: visible;
 }
 
 .register__button {
@@ -95,6 +110,10 @@
 
 .register__button:hover {
   opacity: 80%;
+}
+
+.register__button:disabled {
+  background-color: #424242;
 }
 
 .register__links {

@@ -1,26 +1,91 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Register.css";
 import PicturePath from "../../images/logo__COLOR_main-1.svg"
+import { useEffect } from "react";
 
-export default function Register() {
+export default function Register({ onRegisterSubmit }) {
+
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isNameError, setNameError] = useState("")
+  const [isEmailError, setEmailError] = useState("");
+  const [isPasswordError, setPasswordError] = useState("");
+  const [nameErrorMessage, setNameErrorMessage] = useState("");
+  const [emailErrorMessage, setEmailErrorMessage] = useState("");
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  useEffect(() => {
+    setIsFormValid(isEmailError && isPasswordError && isNameError);
+  }, [isEmailError, isPasswordError, isNameError]);
+
+
+  const handleChangeName = (e) => {
+    setName(e.target.value);
+    setNameError(e.target.validity.valid);
+    setNameErrorMessage(e.target.validity.valid ? "" : e.target.validationMessage)
+  };
+
+  const handleChangeEmail = (e) => {
+    setEmail(e.target.value);
+    setEmailError(e.target.validity.valid);
+    setEmailErrorMessage(e.target.validity.valid ? "" : e.target.validationMessage)
+  };
+
+  const handleChangePassword = (e) => {
+    setPassword(e.target.value);
+    setPasswordError(e.target.validity.valid)
+    setPasswordErrorMessage(e.target.validity.valid ? "" : e.target.validationMessage)
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onRegisterSubmit({ name, email, password});
+  }
+
   return(
-  <section className="register">
+    <>
+      <header />
+      <main>
+      <section className="register">
     <div className="register__wrapper">
     <a className="register__to-main" href="/"><img src={PicturePath} alt="logo" className="register__logo"/></a>
       <h4 className="register__title form-title">
         Добро пожаловать!
       </h4>
-      <form className="register__form">
+      <form className="register__form" onSubmit={handleSubmit}>
         <p className="register__text">Имя</p>
-        <input className="register__input register__name-input" type="text" defaultValue="Виталий"/>
-        <p className="register__name-error">Что-то пошло не так...</p>
+        <input 
+          className="register__input register__name-input"
+          type="text"
+          name="name"
+          value={name}
+          onChange={handleChangeName}
+          required
+        />
+        <p className={`register__name-error ${!isNameError ? "register__name-error_visible" : ""} `}>{nameErrorMessage}</p>
         <p className="register__text">E-mail</p>
-        <input className="register__input register__email-input" type="text" />
-        <p className="register__email-error">Что-то пошло не так...</p>
+        <input 
+          className="register__input register__email-input"
+          type="email" 
+          name="email"
+          value={email}
+          onChange={handleChangeEmail}
+          required
+          />
+        <p className={`register__email-error ${!isEmailError ? "register__email-error_visible" : ""} `}>{emailErrorMessage}</p>
         <p className="register__text">Пароль</p>
-        <input className="register__input register__email-input" type="password" />
-        <p className="register__password-error">Что-то пошло не так...</p>
-        <button className="register__button">Зарегистрироваться</button>
+        <input
+          className="register__input register__email-input"
+          type="password" 
+          name="password"
+          value={password}
+          onChange={handleChangePassword}
+          required
+        />
+        <p className={`register__password-error ${!isPasswordError ? "register__password-error_visible" : ""} `}>{passwordErrorMessage}</p>
+        <button className="register__button" disabled={!isFormValid}>Зарегистрироваться</button>
       </form>
       <div className="register__links">
         <span className="register__question">Уже зарегистрированы?</span>
@@ -29,6 +94,10 @@ export default function Register() {
 
     </div>
   </section>
+      </main>
+      <footer />
+    </>
+  
   ) 
     
 }

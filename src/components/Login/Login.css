@@ -69,6 +69,11 @@
   margin: 0;
   line-height: 24px;
   visibility: hidden;
+  min-height: 24px;
+}
+
+.login__email-error__visible {
+  visibility: visible;
 }
 
 .login__password-error {
@@ -78,7 +83,12 @@
   line-height: 24px;
   padding-bottom: 196px;
   visibility: hidden;
+  min-height: 24px;
 }
+.login__password-error__visible {
+  visibility: visible;
+}
+
 
 .login__button {
   background-color: #4285F4;
@@ -94,6 +104,10 @@
 
 .login__button:hover {
   opacity: 70%;
+}
+
+.login__button:disabled {
+  background-color: #424242;
 }
 
 .login__links {

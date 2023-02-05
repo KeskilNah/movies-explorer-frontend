@@ -1,11 +1,14 @@
 .movies {
   background-color: #202020;
+  min-height: 100%;
+  flex: 1 1 auto;
 }
 
 .movies__wrapper {
   margin: 0 auto;
   padding: 70px 30px 30px;
   max-width: 1140px;
+  flex: 1 1 auto;
 }
 
 @media screen and (max-width: 1279px) {

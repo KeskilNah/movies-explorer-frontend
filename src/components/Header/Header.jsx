@@ -1,16 +1,19 @@
 import "./Header.css"
 import React from "react";
+import { useLocation } from 'react-router-dom';
 import headerLogo from "../../images/logo__COLOR_main-1.svg";
+import Navigation from "../Navigation/Navigation";
 
-function Header() {
+function Header(props) {
+  const location = useLocation();
+
+  const backgroundClass = `header${(location.pathname === "/") ? " header__color-blue" : " header__color-grey"}`;
+
   return(
-    <header className="header">
+    <header className={backgroundClass}>
       <div className="header__wrapper">
-        <a href="#AboutProject"><img src={headerLogo} alt="logo" className="header__logo"/></a>
-        <nav className="header__nav">
-          <a href="/signup" className="header__singup">Регистрация</a>
-          <a href="/signin" className="header__singin">Войти</a>
-        </nav>
+        <a href="/"><img src={headerLogo} alt="logo" className="header__logo"/></a>
+        <Navigation isLoggedIn={props.isLoggedIn} />
       </div>
     </header>
   )

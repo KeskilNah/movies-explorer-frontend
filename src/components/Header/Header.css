@@ -1,5 +1,13 @@
 .header {
+  
+}
+
+.header__color-blue {
   background-color: #073042;
+}
+
+.header__color-grey {
+  background-color: #202020;
 }
 
 .header__wrapper {
