@@ -19,22 +19,22 @@ function MoviesCard({
 
   const [isSavedMovie, setIsSavedMovie] = useState(false);
   const currentUser = useContext(CurrentUserContext);
+
   useEffect(() => {
-    console.log(item.id)
     if (savedMovies.length > 0) {
+      console.log(isSavedMovie)
       if (!isSavedMovie) {
         setIsSavedMovie(
           savedMovies.some(
             (savedMovie) =>
-              savedMovie.movieId === item.id &&
-              savedMovie.owner === currentUser._id
+              savedMovie.movieId === item.id 
           )
         );
       }
     } else {
       setIsSavedMovie(false);
     }
-  }, [currentUser._id, isSavedMovie, item.id, savedMovies]);
+  }, [currentUser._id, isSavedMovie, item.id, savedMovies, item]);
 
   function handleAddClick() {
     if (!isSavedMovie) {
@@ -67,6 +67,7 @@ function MoviesCard({
       item.classList.remove('hidden')
     } 
   })
+
   return(
     <li className="card">
       <a href={trailerLink} target="_blank" rel="noreferrer"><img src={(location.pathname === "/saved-movies") ? item.image : `https://api.nomoreparties.co${item.image.url}`} alt="card" className="card__image"/></a>
@@ -75,9 +76,9 @@ function MoviesCard({
         {
         (location.pathname === "/saved-movies")
         ?
-        <button className={isSavedMovie ? "card__delete-button" : "card__delete-button"} onClick={handleDeleteClick}></button>
+        <button className={!isSavedMovie ? "card__delete-button" : "card__delete-button"} onClick={handleDeleteClick}></button>
         :
-        <button className={isSavedMovie ? "card__save-button" : "card__save-button card__save-button_active"} onClick={handleAddClick}></button>
+        <button className={!isSavedMovie ? "card__save-button" : "card__save-button card__save-button_active"} onClick={handleAddClick}></button>
         }
         <p className="card__duration">{durationHandle()}</p>
       </div>

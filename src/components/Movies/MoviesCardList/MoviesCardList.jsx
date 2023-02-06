@@ -5,8 +5,6 @@ import Preloader from "../Preloader/Preloader";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-
-
 function MoviesCardList({
   movies,
   renderMovie,
@@ -53,13 +51,16 @@ function MoviesCardList({
       setMaxCards(maxCards + 1);
     }
   }
-
+  
   useEffect(() => {
-    const cardsCount = (pathname === "movies")? renderMovie.length : savedMovies.length
+    const cardsCount = (pathname === "/movies") ? renderMovie.length : savedMovies.length;
+    console.log(renderMovie.length)
+    console.log(savedMovies.length)
+    console.log(maxCards)
     if(cardsCount <= maxCards) {
       setMoreButtonVisible (true)
     } else {setMoreButtonVisible (false)}
-  }, [maxCards, pathname, renderMovie.length, savedMovies.length])
+  }, [maxCards, pathname, renderMovie, savedMovies])
 
   useEffect(() => {
     if(savedMovies.length === 0) {

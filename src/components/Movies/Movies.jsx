@@ -37,27 +37,24 @@ function Movies({isLoggedIn}) {
   }, [pathname])
 
   function filterMovies(films) {
-    if(!isShortsOn) {
-      return shortMoviesHandle(films)
+    if (isShortsOn) {
+      return shortMoviesHandle(films);
     }
     return films.filter((movie) => movie.duration >= 40);
   }
 
-  const filteredMovies = useMemo(
+  const filteredMovies = React.useMemo(
     () => filterMovies(movies),
     [isShortsOn, movies]
   );
-
-  const filteredRenderMovies = useMemo(
+  const filteredRenderMovies = React.useMemo(
     () => filterMovies(renderMovie),
     [isShortsOn, renderMovie]
   );
-
-  const filteredSavedMovies = useMemo(
+  const filteredSavedMovies = React.useMemo(
     () => filterMovies(savedMovies),
-    [isShortsOn, savedMovies, pathname]
+    [isShortsOn, savedMovies]
   );
-
 
   function filterMoviesBySearch(movieList) {
     const films = movieList.filter((movie) => 
@@ -84,7 +81,8 @@ function Movies({isLoggedIn}) {
           })
           .catch((err) => {
             console.log(err);
-          });
+          })
+          .finally(setIsLoading(false));
         return;
       }
       console.log('3')
@@ -95,9 +93,11 @@ function Movies({isLoggedIn}) {
       );
       setIsLoading(false)
     } else {
+      
       setSavedMovies(
         savedMovies.filter((movie) => movie.nameRU.includes(searchValue))
       );
+      setIsLoading(false)
     }
   }
 
