@@ -17,6 +17,7 @@ function MoviesCardList({
   const [emptyTextVisible, setEmptyTextVisible] = useState(false);
   const [moreButtonVisible, setMoreButtonVisible] = useState(true);
   const [maxCards, setMaxCards] = useState(12);
+  const [emptyText, setEmptyText] = useState("Тут пока пусто")
   
   const { pathname } = useLocation();
 
@@ -31,42 +32,66 @@ function MoviesCardList({
   const resiseHandles = () => {
     if(window.innerWidth >= 1280) {
       setMaxCards(12);
+      window.removeEventListener("resize", resiseHandles);
     } else if (window.innerWidth <= 1280 && window.innerWidth > 1200) {
       setMaxCards(9);
+      window.removeEventListener("resize", resiseHandles);
     } else if (window.innerWidth <= 1200 && window.innerWidth > 776) {
       setMaxCards(8);
+      window.removeEventListener("resize", resiseHandles);
     } else if (window.innerWidth <= 775) {
       setMaxCards(5);
+      window.removeEventListener("resize", resiseHandles);
+    } else {
+      window.removeEventListener("resize", resiseHandles);
     }
   }
   window.addEventListener("resize", resiseHandles);
   const handleMoreClick = () => {
     if(window.innerWidth >= 1280) {
       setMaxCards(maxCards + 4);
+      window.removeEventListener("resize", resiseHandles);
     } else if (window.innerWidth <= 1280 && window.innerWidth > 1200) {
       setMaxCards(maxCards + 3);
+      window.removeEventListener("resize", resiseHandles);
     } else if (window.innerWidth <= 1200 && window.innerWidth > 776) {
       setMaxCards(maxCards + 2);
+      window.removeEventListener("resize", resiseHandles);
     } else if (window.innerWidth <= 775) {
       setMaxCards(maxCards + 1);
+      window.removeEventListener("resize", resiseHandles);
+    } else {
+      window.removeEventListener("resize", resiseHandles);
     }
   }
   
   useEffect(() => {
     const cardsCount = (pathname === "/movies") ? renderMovie.length : savedMovies.length;
-    console.log(renderMovie.length)
-    console.log(savedMovies.length)
-    console.log(maxCards)
     if(cardsCount <= maxCards) {
       setMoreButtonVisible (true)
     } else {setMoreButtonVisible (false)}
   }, [maxCards, pathname, renderMovie, savedMovies])
 
+
+
   useEffect(() => {
-    if(savedMovies.length === 0) {
-      setEmptyTextVisible (true)
-    } else {setEmptyTextVisible (false)}
-  }, [savedMovies.length])
+    if(pathname === "/saved-movies") {
+      if(savedMovies.length === 0) {
+        setEmptyTextVisible (true)
+        setEmptyText("Ничего не найдено")
+      } else {setEmptyTextVisible (false)}
+    } else {
+      if(renderMovie.length === 0) {
+        setEmptyTextVisible (true)
+        setEmptyText("Ничего не найдено")
+      } else {setEmptyTextVisible (false)}
+    }
+    
+  }, [savedMovies.length, renderMovie.length, pathname])
+
+  useEffect(() => {
+    
+  }, [renderMovie.length])
 
   return(
     <section className="movies__card-list">
@@ -104,7 +129,7 @@ function MoviesCardList({
             {}
           </ul>
           {isLoading ? <Preloader /> : ''}
-          {emptyTextVisible ? <p className="movies__empty">Ничего не найдено</p> : ''}
+          {emptyTextVisible ? <p className="movies__empty">{emptyText}</p> : ''}
         <div className="movies__more">
           {!moreButtonVisible ? <button className="movies__more-button" onClick={handleMoreClick}>Ещё</button> : ''}
         </div>

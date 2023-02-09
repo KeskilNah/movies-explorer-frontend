@@ -155,3 +155,5 @@ export const MainOptions = {
 export const MoviesOptions = {
   url: "https://api.nomoreparties.co/",
 }
+
+export const ShortDuration = 40;

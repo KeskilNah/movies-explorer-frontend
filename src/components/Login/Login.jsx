@@ -3,7 +3,7 @@ import "./Login.css";
 import PicturePath from "../../images/logo__COLOR_main-1.svg"
 import { useEffect } from "react";
 
-export default function Login({ onLoginSubmit }) {
+export default function Login({ onLoginSubmit, isLoading }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
@@ -52,6 +52,7 @@ export default function Login({ onLoginSubmit }) {
           name="email"
           value={email}
           onChange={handleChangeEmail}
+          disabled={isLoading}
           required
         />
         <p className={`login__email-error ${!isEmailError ? "login__email-error__visible" : ""}`}>{emailErrorMessage}</p>
@@ -63,10 +64,11 @@ export default function Login({ onLoginSubmit }) {
           value={password}
           onChange={handleChangePassword}
           onInput={handleChangePassword}
+          disabled={isLoading}
           required
           />
         <p className={`login__password-error ${!isPasswordError ? "login__password-error__visible" : ""}`}>{passwordErrorMessage}</p>
-        <button className="login__button" disabled={!isFormValid}>Войти</button>
+        <button className="login__button" disabled={!isFormValid || isLoading}>Войти</button>
       </form>
       <div className="login__links">
         <span className="login__question">Ещё не зарегистрированы?</span>

@@ -11,16 +11,19 @@ import mainApi from "../../utils/MainApi";
 import { useLocation } from "react-router-dom";
 import shortMoviesHandle from "../../helpres/shortMoviesHandle"
 import { useMemo } from "react";
+import { ShortDuration } from "../../utils/constants";
 
 function Movies({isLoggedIn}) {
 
-  const [isShortsOn, setIsShortOn] = React.useState(false);
+  const [isShortsOn, setIsShortOn] = useState(false);
   const [movies, setMovies] = useState([]);
-  const [renderMovie, setRenderMovie] = React.useState([]);
+  const [renderMovie, setRenderMovie] = useState([]);
   const [isLoading, setIsLoading] = useState(false)
-  const [savedMovies, setSavedMovies] = React.useState([]);
-  const [searchValue, setSearchValue] = React.useState("");
-  const { pathname } = useLocation()
+  const [savedMovies, setSavedMovies] = useState([]);
+
+  const [searchValue, setSearchValue] = useState("");
+  const { pathname } = useLocation();
+  const [inputError, setInputError] = useState("");
 
   useEffect(() => {
     mainApi.getMovies()
@@ -40,18 +43,24 @@ function Movies({isLoggedIn}) {
     if (isShortsOn) {
       return shortMoviesHandle(films);
     }
-    return films.filter((movie) => movie.duration >= 40);
+    return films.filter((movie) => movie.duration >= ShortDuration);
   }
 
-  const filteredMovies = React.useMemo(
+  useEffect(() => {
+    if(pathname === "/movies") {
+      setSearchValue (localStorage.getItem("search_film") || "")
+    }
+  }, [pathname])
+
+  const filteredMovies = useMemo(
     () => filterMovies(movies),
     [isShortsOn, movies]
   );
-  const filteredRenderMovies = React.useMemo(
+  const filteredRenderMovies = useMemo(
     () => filterMovies(renderMovie),
     [isShortsOn, renderMovie]
   );
-  const filteredSavedMovies = React.useMemo(
+  const filteredSavedMovies = useMemo(
     () => filterMovies(savedMovies),
     [isShortsOn, savedMovies]
   );
@@ -68,6 +77,12 @@ function Movies({isLoggedIn}) {
 
   function onSearchSubmit(evt) {
     evt.preventDefault();
+    if (searchValue === "") {
+      setInputError("Нужно ввести ключевое слово");
+      return;
+    }
+
+    (localStorage.setItem("search_film", searchValue));
     setIsLoading(true)
     if (pathname === "/movies") {
       if (!localStorage.getItem("moviesList")) {
@@ -85,6 +100,7 @@ function Movies({isLoggedIn}) {
           .finally(setIsLoading(false));
         return;
       }
+      setIsLoading(true)
       console.log('3')
       filterMoviesBySearch(
         localStorage.getItem("moviesList")
@@ -113,7 +129,6 @@ function Movies({isLoggedIn}) {
   }
 
   function deleteMovie(movieId) {
-    console.log(movieId)
     mainApi
       .deleteMovie(movieId)
       .then(() => {
@@ -124,7 +139,6 @@ function Movies({isLoggedIn}) {
         console.log(err);
       });
   }
-console.log(filteredSavedMovies)
   return(
     <>
     <Header isLoggedIn={isLoggedIn}/>
@@ -135,7 +149,10 @@ console.log(filteredSavedMovies)
           isShortsOn={isShortsOn}
           setIsShortOn={setIsShortOn}
           searchValue={searchValue}
-          setSearchValue={setSearchValue}/>
+          setSearchValue={setSearchValue}
+          inputError={inputError}
+          setInputError={setInputError}
+          />
         <MoviesCardList
           movies={filteredMovies}
           renderMovie={filteredRenderMovies}

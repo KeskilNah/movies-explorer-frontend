@@ -140,6 +140,10 @@
 .navigation__singin:hover {
   opacity: 70%;
 }
+.udnerline {
+  text-decoration: solid underline #FFF 2px;
+  text-underline-offset: 8px
+}
 
 @media screen and (max-width: 320px) {
 

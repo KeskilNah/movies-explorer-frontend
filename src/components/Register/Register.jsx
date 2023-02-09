@@ -3,7 +3,7 @@ import "./Register.css";
 import PicturePath from "../../images/logo__COLOR_main-1.svg"
 import { useEffect } from "react";
 
-export default function Register({ onRegisterSubmit }) {
+export default function Register({ onRegisterSubmit, isLoading }) {
 
   const [name, setName] = useState("")
   const [email, setEmail] = useState("");
@@ -62,6 +62,7 @@ export default function Register({ onRegisterSubmit }) {
           name="name"
           value={name}
           onChange={handleChangeName}
+          disabled={isLoading}
           required
         />
         <p className={`register__name-error ${!isNameError ? "register__name-error_visible" : ""} `}>{nameErrorMessage}</p>
@@ -72,6 +73,7 @@ export default function Register({ onRegisterSubmit }) {
           name="email"
           value={email}
           onChange={handleChangeEmail}
+          disabled={isLoading}
           required
           />
         <p className={`register__email-error ${!isEmailError ? "register__email-error_visible" : ""} `}>{emailErrorMessage}</p>
@@ -82,10 +84,11 @@ export default function Register({ onRegisterSubmit }) {
           name="password"
           value={password}
           onChange={handleChangePassword}
+          disabled={isLoading}
           required
         />
         <p className={`register__password-error ${!isPasswordError ? "register__password-error_visible" : ""} `}>{passwordErrorMessage}</p>
-        <button className="register__button" disabled={!isFormValid}>Зарегистрироваться</button>
+        <button className="register__button" disabled={!isFormValid || isLoading}>Зарегистрироваться</button>
       </form>
       <div className="register__links">
         <span className="register__question">Уже зарегистрированы?</span>

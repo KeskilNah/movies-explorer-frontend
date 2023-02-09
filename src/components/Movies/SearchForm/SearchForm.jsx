@@ -9,7 +9,9 @@ function SearchForm({
   isShortsOn,
   setIsShortOn,
   searchValue,
-  setSearchValue
+  setSearchValue,
+  inputError,
+  setInputError,
   }) {
 
   const [validationMessage, setValidationMessage] = useState("");
@@ -21,7 +23,7 @@ function SearchForm({
   }
   return(
         <section className="search">
-            <form action="" className="search__form" onSubmit={searchSubmit}>
+            <form action="" className="search__form" onSubmit={searchSubmit} noValidate>
               <div className="search__wrapper">
                 <img className="search__ico" src={searchIco} alt="search-icon" />
                 <input 
@@ -31,6 +33,7 @@ function SearchForm({
                   required
                   value={searchValue}
                   onChange={handleSearchValue}
+                  onClick={() => setInputError("")}
                 />
                 <button type="submit" className="search__submit"></button>
                 <div className="search__line"></div>
@@ -40,7 +43,7 @@ function SearchForm({
                   <label className="trigger__text" htmlFor="trigger1">Короткометражки</label>
               </div>
             </form>
-          
+            <span className="search__error">{inputError}</span>
         <div className="underline underline_grey"></div>
       </section>
   )

@@ -19,6 +19,7 @@ function App() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState({});
   const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     let jwt = localStorage.getItem("jwt");
@@ -54,6 +55,7 @@ function App() {
   }
 
   const handleLoginSubmit = (data) => {
+    setIsLoading(true)
     mainApi.login(data)
     .then((res) => {
       if(res) {
@@ -64,13 +66,14 @@ function App() {
             name: response.name,
             email: response.email,
           })
-          setLoggedIn(true);
-          navigate("/")
+          navigate("/movies")
         })
       }
+      setIsLoading(false)
     })
   .catch((err) => {
       console.log(err);
+      setIsLoading(false)
     });
   }
 
@@ -78,7 +81,7 @@ function App() {
     mainApi.register(data)
       .then((res) => {
         if(res) {
-          navigate("/signin");
+          handleLoginSubmit(data)
         }
       })
       .catch((err) => {
@@ -131,17 +134,18 @@ function App() {
                   isLoggedIn={isLoggedIn}
                   onLogout={handleLogoutSubmit}
                   onProfileEdit={handleUpdateUser}
+                  isLoading={isLoading}
                 />
               </ProtectedRoute>
             )}
           />
           <Route
             path="signin"
-            element={<Login onLoginSubmit={handleLoginSubmit}/>}
+            element={<Login onLoginSubmit={handleLoginSubmit} isLoading={isLoading}/>}
           />
           <Route
             path="signup"
-            element={<Register onRegisterSubmit={handleRegistrationSubmit}/>}
+            element={<Register onRegisterSubmit={handleRegistrationSubmit} isLoading={isLoading}/>}
           />
           <Route
             path="*"

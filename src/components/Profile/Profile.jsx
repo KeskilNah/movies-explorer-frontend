@@ -9,6 +9,7 @@ export default function Profile(props) {
   const [inputsDisabled, setInputDisabled] = useState(true);
   const [newName, setNewName] = useState("")
   const [newEmail, setNewEmail] = useState("")
+  const [profileSavedMessage, setProfileSavedMessage] = useState("")
 
   useEffect(() => {
     setNewEmail(currentUser.email)
@@ -26,14 +27,19 @@ export default function Profile(props) {
   const handleSaveButton = () => {
     setInputDisabled(true);
     props.onProfileEdit({name: newName, email: newEmail})
+    setProfileSavedMessage("Данные сохранены!")
   }
 
   const handleChangeEmail = (e) => {
+    setIsValueChanged(true)
     setNewEmail(e.target.value)
   }
   const handleChangeName = (e) => {
+    setIsValueChanged(true)
     setNewName(e.target.value)
   }
+
+  const [isValuesChanged, setIsValueChanged] = useState(false)
 
 
   return(
@@ -53,7 +59,7 @@ export default function Profile(props) {
               type="text"
               className="profile__name profile__input"
               value={newName}
-              disabled={inputsDisabled}
+              disabled={inputsDisabled || props.isLoading}
               required
               onChange={handleChangeName}
             />
@@ -65,14 +71,15 @@ export default function Profile(props) {
               type="text"
               className="profile__email profile__input"
               defaultValue={newEmail}
-              disabled={inputsDisabled}
+              disabled={inputsDisabled || props.isLoading}
               required
               onChange={handleChangeEmail}
             />
           </div>
           <div className={`underline underline_grey ${underlineClass}`}></div>
+          <p className="profile__message">{profileSavedMessage}</p>
           <button type="button" className={`profile__edit profile__button ${buttonSaveClass}`} onClick={handleEditButton}>Редактировать</button>
-          <button type="button" className={`profile__edit profile__button ${buttonEditClass}`} onClick={handleSaveButton}>Сохранить</button>
+          <button type="button" className={`profile__edit profile__button ${buttonEditClass}`} onClick={handleSaveButton} disabled={!isValuesChanged || props.isLoading}>Сохранить</button>
           <button type="button" className="profile__signout" onClick={props.onLogout}>Выйти из аккаунта</button>
         </div>
         </section>
