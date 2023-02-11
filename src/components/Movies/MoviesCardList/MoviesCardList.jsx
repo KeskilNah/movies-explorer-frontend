@@ -14,12 +14,13 @@ function MoviesCardList({
   addMovie,
   deleteMovie,
   setRenderMovie,
+  emptyText,
 }) {
 
   const [emptyTextVisible, setEmptyTextVisible] = useState(false);
   const [moreButtonVisible, setMoreButtonVisible] = useState(true);
   const [maxCards, setMaxCards] = useState(12);
-  const [emptyText, setEmptyText] = useState("Тут пока пусто")
+
   
   const { pathname } = useLocation();
 
@@ -75,17 +76,16 @@ function MoviesCardList({
   }, [maxCards, pathname, renderMovie, savedMovies])
 
 
-
   useEffect(() => {
     if(pathname === "/saved-movies") {
       if(savedMovies.length === 0) {
         setEmptyTextVisible (true)
-        setEmptyText("Ничего не найдено")
+
       } else {setEmptyTextVisible (false)}
     } else {
       if(renderMovie.length === 0) {
         setEmptyTextVisible (true)
-        setEmptyText("Ничего не найдено")
+
       } else {setEmptyTextVisible (false)}
     }
     

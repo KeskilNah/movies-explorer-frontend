@@ -23,6 +23,7 @@ function Movies({isLoggedIn}) {
   const [searchValue, setSearchValue] = useState("");
   const { pathname } = useLocation();
   const [inputError, setInputError] = useState("");
+  const [emptyText, setEmptyText] = useState("Тут пока пусто")
 
   useEffect(() => {
     mainApi.getMovies()
@@ -82,6 +83,7 @@ function Movies({isLoggedIn}) {
       return;
     }
     (localStorage.setItem("search_film", searchValue));
+    setEmptyText("Ничего не найдено")
     setIsLoading(true)
     if (pathname === "/movies") {
       if (!localStorage.getItem("moviesList")) {
@@ -158,6 +160,7 @@ function Movies({isLoggedIn}) {
           addMovie={addMovie}
           deleteMovie={deleteMovie}
           setRenderMovie={setRenderMovie}
+          emptyText={emptyText}
         />
       </div>
     </main>
