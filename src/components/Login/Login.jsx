@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import "./Login.css";
 import PicturePath from "../../images/logo__COLOR_main-1.svg"
 import { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
-export default function Login({ onLoginSubmit, isLoading }) {
+export default function Login({ onLoginSubmit, isLoading, isLoggedIn }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
@@ -11,7 +12,14 @@ export default function Login({ onLoginSubmit, isLoading }) {
   const [isPasswordError, setPasswordError] = useState("");
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    console.log(isLoggedIn)
+    if(isLoggedIn) {
+      navigate("/")
+    }
+  }, [isLoggedIn, navigate])
 
   useEffect(() => {
     setIsFormValid(isEmailError && isPasswordError);
@@ -54,6 +62,7 @@ export default function Login({ onLoginSubmit, isLoading }) {
           onChange={handleChangeEmail}
           disabled={isLoading}
           required
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
         />
         <p className={`login__email-error ${!isEmailError ? "login__email-error__visible" : ""}`}>{emailErrorMessage}</p>
         <p className="login__text">Пароль</p>

@@ -35,9 +35,12 @@ function App() {
           setLoggedIn(true);
         }
       })
-      .catch((e) => console.log(`error${e}`));
+      .catch((e) => {
+        console.log(`error${e}`)
+        navigate("/signin");
+      });
     }
-  }, [isLoggedIn, currentUser.name, currentUser.email])
+  }, [isLoggedIn, currentUser.name, currentUser.email, navigate])
 
   const handleUpdateUser = (data) => {
     MainApi.editProfile(data)
@@ -91,6 +94,9 @@ function App() {
 
   const handleLogoutSubmit = () => {
     localStorage.setItem("jwt", "");
+    localStorage.setItem("foundFilms", "")
+    localStorage.setItem("search_film", "")
+    localStorage.setItem("moviesList", "")
     setLoggedIn(false);
     navigate("/signin")
   }
@@ -141,11 +147,11 @@ function App() {
           />
           <Route
             path="signin"
-            element={<Login onLoginSubmit={handleLoginSubmit} isLoading={isLoading}/>}
+            element={<Login onLoginSubmit={handleLoginSubmit} isLoading={isLoading} isLoggedIn={isLoggedIn}/>}
           />
           <Route
             path="signup"
-            element={<Register onRegisterSubmit={handleRegistrationSubmit} isLoading={isLoading}/>}
+            element={<Register onRegisterSubmit={handleRegistrationSubmit} isLoading={isLoading} isLoggedIn={isLoggedIn}/>}
           />
           <Route
             path="*"

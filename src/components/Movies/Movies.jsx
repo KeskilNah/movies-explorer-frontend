@@ -20,7 +20,6 @@ function Movies({isLoggedIn}) {
   const [renderMovie, setRenderMovie] = useState([]);
   const [isLoading, setIsLoading] = useState(false)
   const [savedMovies, setSavedMovies] = useState([]);
-
   const [searchValue, setSearchValue] = useState("");
   const { pathname } = useLocation();
   const [inputError, setInputError] = useState("");
@@ -50,7 +49,8 @@ function Movies({isLoggedIn}) {
     if(pathname === "/movies") {
       setSearchValue (localStorage.getItem("search_film") || "")
     }
-  }, [pathname])
+    setIsShortOn (!JSON.parse(localStorage.getItem("short_films")))
+  }, [pathname], isShortsOn)
 
   const filteredMovies = useMemo(
     () => filterMovies(movies),
@@ -81,15 +81,14 @@ function Movies({isLoggedIn}) {
       setInputError("Нужно ввести ключевое слово");
       return;
     }
-
     (localStorage.setItem("search_film", searchValue));
     setIsLoading(true)
     if (pathname === "/movies") {
       if (!localStorage.getItem("moviesList")) {
-        console.log('2')
         moviesApi
           .getMovies()
           .then((moviesList) => {
+            setIsLoading(true)
             localStorage.setItem("moviesList", JSON.stringify(moviesList));
             filterMoviesBySearch(JSON.parse(localStorage.moviesList));
             setIsLoading(false)
@@ -100,8 +99,7 @@ function Movies({isLoggedIn}) {
           .finally(setIsLoading(false));
         return;
       }
-      setIsLoading(true)
-      console.log('3')
+      setIsLoading(true);
       filterMoviesBySearch(
         localStorage.getItem("moviesList")
           ? JSON.parse(localStorage.moviesList)
@@ -109,7 +107,6 @@ function Movies({isLoggedIn}) {
       );
       setIsLoading(false)
     } else {
-      
       setSavedMovies(
         savedMovies.filter((movie) => movie.nameRU.includes(searchValue))
       );

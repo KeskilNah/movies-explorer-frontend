@@ -2,6 +2,7 @@ import React from "react";
 import "./SearchForm.css"
 import searchIco from "../.././../images/icons/icon-search.svg"
 import { useState } from "react";
+import { useEffect } from "react";
 
 
 function SearchForm({
@@ -14,13 +15,21 @@ function SearchForm({
   setInputError,
   }) {
 
-  const [validationMessage, setValidationMessage] = useState("");
+    useEffect(() => {
+      document.querySelector(".trigger")
+    }, [isShortsOn])
 
+  const [validationMessage, setValidationMessage] = useState("");
   const handleSearchValue = (evt) => {
     setSearchValue(evt.target.value)
     const validationText = ((evt.target.validity.valid ? "Фильм" : `${evt.target.validationMessage}`))
     setValidationMessage(validationText)
   }
+  const handleTriggerClick = () => {
+    setIsShortOn(!isShortsOn);
+    (localStorage.setItem("short_films", JSON.stringify(isShortsOn)))
+  }
+  
   return(
         <section className="search">
             <form action="" className="search__form" onSubmit={searchSubmit} noValidate>
@@ -39,7 +48,13 @@ function SearchForm({
                 <div className="search__line"></div>
               </div>
               <div className="trigger">
-                  <input type="checkbox" className="trigger__checkbox" id="trigger1" onClick={()=> { setIsShortOn(!isShortsOn)}}/>
+                  <input
+                  type="checkbox"
+                  className="trigger__checkbox"
+                  id="trigger1"
+                  onChange={handleTriggerClick}
+                  defaultChecked={!JSON.parse(localStorage.getItem("short_films"))}
+                  />
                   <label className="trigger__text" htmlFor="trigger1">Короткометражки</label>
               </div>
             </form>

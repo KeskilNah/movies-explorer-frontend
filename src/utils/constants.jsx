@@ -157,3 +157,17 @@ export const MoviesOptions = {
 }
 
 export const ShortDuration = 40;
+
+export const resolutions = {
+  laptopL: 1280,
+  laptop: 1200,
+  tablet: 776,
+
+}
+
+export const maxCardNumber = {
+  laptopLMaxCards: 12,
+  laptopMaxCards: 9,
+  tabletMaxCards: 8,
+  mobileDeviceMaxCards: 5,
+}

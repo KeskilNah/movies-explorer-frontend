@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import "./Register.css";
 import PicturePath from "../../images/logo__COLOR_main-1.svg"
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-export default function Register({ onRegisterSubmit, isLoading }) {
+export default function Register({ onRegisterSubmit, isLoading, isLoggedIn }) {
 
   const [name, setName] = useState("")
   const [email, setEmail] = useState("");
@@ -15,6 +16,13 @@ export default function Register({ onRegisterSubmit, isLoading }) {
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if(isLoggedIn) {
+      navigate("/")
+    }
+  }, [isLoggedIn, navigate])
 
   useEffect(() => {
     setIsFormValid(isEmailError && isPasswordError && isNameError);

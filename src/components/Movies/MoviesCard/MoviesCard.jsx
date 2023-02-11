@@ -22,7 +22,6 @@ function MoviesCard({
 
   useEffect(() => {
     if (savedMovies.length > 0) {
-      console.log(isSavedMovie)
       if (!isSavedMovie) {
         setIsSavedMovie(
           savedMovies.some(
@@ -36,7 +35,7 @@ function MoviesCard({
     }
   }, [currentUser._id, isSavedMovie, item.id, savedMovies, item]);
 
-  function handleAddClick() {
+  function handleAddClick(evt) {
     if (!isSavedMovie) {
       addMovie(item);
       setIsSavedMovie(true);
@@ -45,7 +44,8 @@ function MoviesCard({
         (savedMovie) => savedMovie.movieId === item.id
       );
       deleteMovie(movieItem[0]._id);
-      setIsSavedMovie(false);
+      evt.target.classList.remove('card__save-button_active')
+      // setIsSavedMovie(false);
     }
   }
 
@@ -59,7 +59,6 @@ function MoviesCard({
     return hours > 0 ? `${hours}ч${min}` : `${min}м`;
   };
   const location = useLocation();
-  console.log(`maxCards = ${maxCards}`)
   const card = document.querySelectorAll(".card")
   card.forEach((item, index) => {
     item.classList.add('hidden')

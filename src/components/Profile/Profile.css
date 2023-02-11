@@ -61,6 +61,8 @@
 .profile__message {
   min-height: 20px;
   margin: 10px auto;
+  transition: 1s;
+  opacity: 0;
 }
 
 .profile__button {
@@ -75,7 +77,12 @@
 }
 
 .profile__edit:disabled {
-  opacity: 0.5;
+  color: rgba(255, 255, 255, 0.397);
+}
+
+.profile__edit:disabled:hover {
+  cursor: default;
+  opacity: 100%;
 }
 
 .profile__button_hidden {

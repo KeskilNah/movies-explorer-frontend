@@ -4,6 +4,7 @@ import MoviesCard from "../MoviesCard/MoviesCard"
 import Preloader from "../Preloader/Preloader";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { resolutions, maxCardNumber } from "../../../utils/constants";
 
 function MoviesCardList({
   movies,
@@ -14,6 +15,7 @@ function MoviesCardList({
   deleteMovie,
   setRenderMovie,
 }) {
+
   const [emptyTextVisible, setEmptyTextVisible] = useState(false);
   const [moreButtonVisible, setMoreButtonVisible] = useState(true);
   const [maxCards, setMaxCards] = useState(12);
@@ -30,17 +32,17 @@ function MoviesCardList({
   }, [movies, setRenderMovie, pathname])
 
   const resiseHandles = () => {
-    if(window.innerWidth >= 1280) {
-      setMaxCards(12);
+    if(window.innerWidth >= resolutions.laptopL) {
+      setMaxCards(maxCardNumber.laptopLMaxCards);
       window.removeEventListener("resize", resiseHandles);
-    } else if (window.innerWidth <= 1280 && window.innerWidth > 1200) {
-      setMaxCards(9);
+    } else if (window.innerWidth <= resolutions.laptopL && window.innerWidth > resolutions.laptop) {
+      setMaxCards(maxCardNumber.laptopMaxCards);
       window.removeEventListener("resize", resiseHandles);
-    } else if (window.innerWidth <= 1200 && window.innerWidth > 776) {
-      setMaxCards(8);
+    } else if (window.innerWidth <= resolutions.laptop && window.innerWidth > resolutions.tablet) {
+      setMaxCards(maxCardNumber.tabletMaxCards);
       window.removeEventListener("resize", resiseHandles);
-    } else if (window.innerWidth <= 775) {
-      setMaxCards(5);
+    } else if (window.innerWidth <= (resolutions.tablet - 1)) {
+      setMaxCards(maxCardNumber.mobileDeviceMaxCards);
       window.removeEventListener("resize", resiseHandles);
     } else {
       window.removeEventListener("resize", resiseHandles);
@@ -48,16 +50,16 @@ function MoviesCardList({
   }
   window.addEventListener("resize", resiseHandles);
   const handleMoreClick = () => {
-    if(window.innerWidth >= 1280) {
+    if(window.innerWidth >= resolutions.laptopL) {
       setMaxCards(maxCards + 4);
       window.removeEventListener("resize", resiseHandles);
-    } else if (window.innerWidth <= 1280 && window.innerWidth > 1200) {
+    } else if (window.innerWidth <= resolutions.laptopL && window.innerWidth > resolutions.laptop) {
       setMaxCards(maxCards + 3);
       window.removeEventListener("resize", resiseHandles);
-    } else if (window.innerWidth <= 1200 && window.innerWidth > 776) {
+    } else if (window.innerWidth <= resolutions.laptop && window.innerWidth > resolutions.tablet) {
       setMaxCards(maxCards + 2);
       window.removeEventListener("resize", resiseHandles);
-    } else if (window.innerWidth <= 775) {
+    } else if (window.innerWidth <= (resolutions.tablet - 1)) {
       setMaxCards(maxCards + 1);
       window.removeEventListener("resize", resiseHandles);
     } else {
@@ -89,9 +91,6 @@ function MoviesCardList({
     
   }, [savedMovies.length, renderMovie.length, pathname])
 
-  useEffect(() => {
-    
-  }, [renderMovie.length])
 
   return(
     <section className="movies__card-list">
