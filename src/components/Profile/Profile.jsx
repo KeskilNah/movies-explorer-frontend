@@ -16,6 +16,12 @@ export default function Profile(props) {
     setNewName(currentUser.name)
   }, [currentUser.name, currentUser.email])
 
+  useEffect(() => {
+    if(currentUser.name === newName && currentUser.email === newEmail) {
+      setIsValueChanged(false)
+    } else (setIsValueChanged(true))
+  }, [newName, newEmail, currentUser.name, currentUser.email])
+
   const buttonEditClass = inputsDisabled ? `profile__button_hidden` : ``;
   const buttonSaveClass = inputsDisabled ? `` : `profile__button_hidden`;
   const underlineClass = inputsDisabled ? `` : `profile__underline`;
@@ -31,11 +37,9 @@ export default function Profile(props) {
   }
 
   const handleChangeEmail = (e) => {
-    setIsValueChanged(true)
     setNewEmail(e.target.value)
   }
   const handleChangeName = (e) => {
-    setIsValueChanged(true)
     setNewName(e.target.value)
   }
 

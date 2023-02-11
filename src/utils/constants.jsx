@@ -171,3 +171,5 @@ export const maxCardNumber = {
   tabletMaxCards: 8,
   mobileDeviceMaxCards: 5,
 }
+
+export const emailPattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"

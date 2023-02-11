@@ -3,6 +3,7 @@ import "./Register.css";
 import PicturePath from "../../images/logo__COLOR_main-1.svg"
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { emailPattern } from "../../utils/constants";
 
 export default function Register({ onRegisterSubmit, isLoading, isLoggedIn }) {
 
@@ -83,6 +84,7 @@ export default function Register({ onRegisterSubmit, isLoading, isLoggedIn }) {
           onChange={handleChangeEmail}
           disabled={isLoading}
           required
+          pattern={emailPattern}
           />
         <p className={`register__email-error ${!isEmailError ? "register__email-error_visible" : ""} `}>{emailErrorMessage}</p>
         <p className="register__text">Пароль</p>

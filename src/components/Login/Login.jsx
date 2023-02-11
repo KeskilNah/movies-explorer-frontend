@@ -3,6 +3,7 @@ import "./Login.css";
 import PicturePath from "../../images/logo__COLOR_main-1.svg"
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { emailPattern } from "../../utils/constants";
 
 export default function Login({ onLoginSubmit, isLoading, isLoggedIn }) {
   const [email, setEmail] = useState("");
@@ -62,7 +63,7 @@ export default function Login({ onLoginSubmit, isLoading, isLoggedIn }) {
           onChange={handleChangeEmail}
           disabled={isLoading}
           required
-          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+          pattern={emailPattern}
         />
         <p className={`login__email-error ${!isEmailError ? "login__email-error__visible" : ""}`}>{emailErrorMessage}</p>
         <p className="login__text">Пароль</p>
