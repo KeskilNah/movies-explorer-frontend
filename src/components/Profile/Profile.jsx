@@ -59,7 +59,7 @@ export default function Profile(props) {
   }
   const [isValuesChanged, setIsValueChanged] = useState(false)
 
-  const isButtonDisabled = !(!isValuesChanged && isFormValid) || props.isLoading;
+  const isButtonDisabled = (!isValuesChanged || !isFormValid) || props.isLoading;
   console.log(isButtonDisabled)
   return(
 
