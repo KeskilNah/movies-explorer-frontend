@@ -49,10 +49,9 @@ function Movies({isLoggedIn}) {
   useEffect(() => {
     if(pathname === "/movies") {
       setSearchValue (localStorage.getItem("search_film") || "")
+      setIsShortOn (!JSON.parse(localStorage.getItem("short_films")))
     }
-    setIsShortOn (!JSON.parse(localStorage.getItem("short_films")))
-    console.log(isShortsOn)
-  }, [pathname], isShortsOn)
+  }, [pathname, isShortsOn])
 
   const filteredMovies = useMemo(
     () => filterMovies(movies),
@@ -115,7 +114,6 @@ function Movies({isLoggedIn}) {
       setIsLoading(false)
       setSavedMovies(
         savedMovies.filter((movie) => movie.nameRU.includes(searchValue))
-        
       );
     }
   }

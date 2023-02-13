@@ -49,7 +49,6 @@ export default function Login({ onLoginSubmit, isLoading, isLoggedIn, isError, e
   const handleSubmit = (e) => {
     e.preventDefault();
     onLoginSubmit({email, password});
-    console.log(isError)
   }
 
   return(

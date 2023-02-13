@@ -3,6 +3,7 @@ import "./SearchForm.css"
 import searchIco from "../.././../images/icons/icon-search.svg"
 import { useState } from "react";
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 
 function SearchForm({
@@ -15,10 +16,7 @@ function SearchForm({
   setInputError,
   }) {
 
-    useEffect(() => {
-      document.querySelector(".trigger")
-    }, [isShortsOn])
-
+  const { pathname } = useLocation();
   const [validationMessage, setValidationMessage] = useState("");
   const handleSearchValue = (evt) => {
     setSearchValue(evt.target.value)
@@ -27,7 +25,9 @@ function SearchForm({
   }
   const handleTriggerClick = () => {
     setIsShortOn(!isShortsOn);
-    (localStorage.setItem("short_films", JSON.stringify(isShortsOn)))
+    if(pathname === "/movies") {
+      (localStorage.setItem("short_films", JSON.stringify(isShortsOn)))
+    }
   }
   
   return(
@@ -53,7 +53,7 @@ function SearchForm({
                   className="trigger__checkbox"
                   id="trigger1"
                   onChange={handleTriggerClick}
-                  defaultChecked={!JSON.parse(localStorage.getItem("short_films"))}
+                  defaultChecked={!JSON.parse(localStorage.getItem("short_films")) && (pathname=== "/movies")}
                   />
                   <label className="trigger__text" htmlFor="trigger1">Короткометражки</label>
               </div>
