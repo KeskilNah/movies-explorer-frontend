@@ -15,7 +15,7 @@ import { ShortDuration } from "../../utils/constants";
 
 function Movies({isLoggedIn}) {
 
-  const [isShortsOn, setIsShortOn] = useState(false);
+  const [isShortsOn, setIsShortOn] = useState(true);
   const [movies, setMovies] = useState([]);
   const [renderMovie, setRenderMovie] = useState([]);
   const [isLoading, setIsLoading] = useState(false)
@@ -51,6 +51,7 @@ function Movies({isLoggedIn}) {
       setSearchValue (localStorage.getItem("search_film") || "")
     }
     setIsShortOn (!JSON.parse(localStorage.getItem("short_films")))
+    console.log(isShortsOn)
   }, [pathname], isShortsOn)
 
   const filteredMovies = useMemo(
@@ -82,15 +83,18 @@ function Movies({isLoggedIn}) {
       setInputError("Нужно ввести ключевое слово");
       return;
     }
-    (localStorage.setItem("search_film", searchValue));
+
+    if(pathname === "/movies") {
+      (localStorage.setItem("search_film", searchValue));
+    }
     setEmptyText("Ничего не найдено")
     setIsLoading(true)
     if (pathname === "/movies") {
       if (!localStorage.getItem("moviesList")) {
+        setIsLoading(true)
         moviesApi
           .getMovies()
           .then((moviesList) => {
-            setIsLoading(true)
             localStorage.setItem("moviesList", JSON.stringify(moviesList));
             filterMoviesBySearch(JSON.parse(localStorage.moviesList));
             setIsLoading(false)
@@ -98,7 +102,6 @@ function Movies({isLoggedIn}) {
           .catch((err) => {
             console.log(err);
           })
-          .finally(setIsLoading(false));
         return;
       }
       setIsLoading(true);
@@ -109,10 +112,11 @@ function Movies({isLoggedIn}) {
       );
       setIsLoading(false)
     } else {
+      setIsLoading(false)
       setSavedMovies(
         savedMovies.filter((movie) => movie.nameRU.includes(searchValue))
+        
       );
-      setIsLoading(false)
     }
   }
 

@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { emailPattern } from "../../utils/constants";
 
-export default function Register({ onRegisterSubmit, isLoading, isLoggedIn }) {
+export default function Register({ onRegisterSubmit, isLoading, isLoggedIn, isError }) {
 
   const [name, setName] = useState("")
   const [email, setEmail] = useState("");
@@ -17,6 +17,7 @@ export default function Register({ onRegisterSubmit, isLoading, isLoggedIn }) {
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
+  const [isRegisteredMessage, setIsRegisteredMessage] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,6 +25,13 @@ export default function Register({ onRegisterSubmit, isLoading, isLoggedIn }) {
       navigate("/")
     }
   }, [isLoggedIn, navigate])
+
+  useEffect(() => {
+    if(isError){
+      setIsRegisteredMessage(`Что-то пошло не так`)
+    }
+    else (setIsRegisteredMessage(""))
+  }, [isError])
 
   useEffect(() => {
     setIsFormValid(isEmailError && isPasswordError && isNameError);
@@ -98,6 +106,7 @@ export default function Register({ onRegisterSubmit, isLoading, isLoggedIn }) {
           required
         />
         <p className={`register__password-error ${!isPasswordError ? "register__password-error_visible" : ""} `}>{passwordErrorMessage}</p>
+        <p className="register__error">{isRegisteredMessage}</p>
         <button className="register__button" disabled={!isFormValid || isLoading}>Зарегистрироваться</button>
       </form>
       <div className="register__links">

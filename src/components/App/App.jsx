@@ -20,6 +20,8 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false)
+  const [isError, setIsError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState("")
 
   useEffect(() => {
     let jwt = localStorage.getItem("jwt");
@@ -69,7 +71,9 @@ function App() {
             name: response.name,
             email: response.email,
           })
-          navigate("/movies")
+          navigate("/movies");
+          setIsError(false)
+          setErrorMessage("")
         })
       }
       setIsLoading(false)
@@ -77,6 +81,7 @@ function App() {
   .catch((err) => {
       console.log(err);
       setIsLoading(false)
+      setIsError(true)
     });
   }
 
@@ -85,10 +90,14 @@ function App() {
       .then((res) => {
         if(res) {
           handleLoginSubmit(data)
+          setIsError(false)
+          setErrorMessage("")
         }
       })
       .catch((err) => {
         console.log(err);
+        setIsError(true)
+        setErrorMessage(err.message)
       })
   }
 
@@ -141,17 +150,31 @@ function App() {
                   onLogout={handleLogoutSubmit}
                   onProfileEdit={handleUpdateUser}
                   isLoading={isLoading}
+                  isError={isError}
+                  errorMessage={errorMessage}
                 />
               </ProtectedRoute>
             )}
           />
           <Route
             path="signin"
-            element={<Login onLoginSubmit={handleLoginSubmit} isLoading={isLoading} isLoggedIn={isLoggedIn}/>}
+            element={<Login
+              onLoginSubmit={handleLoginSubmit}
+              isLoading={isLoading}
+              isLoggedIn={isLoggedIn}
+              isError={isError}
+              errorMessage={errorMessage}
+              />}
           />
           <Route
             path="signup"
-            element={<Register onRegisterSubmit={handleRegistrationSubmit} isLoading={isLoading} isLoggedIn={isLoggedIn}/>}
+            element={<Register
+              onRegisterSubmit={handleRegistrationSubmit}
+              isLoading={isLoading}
+              isLoggedIn={isLoggedIn}
+              isError={isError}
+              errorMessage={errorMessage}
+              />}
           />
           <Route
             path="*"

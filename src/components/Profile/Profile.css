@@ -62,8 +62,9 @@
   min-height: 20px;
   margin: 10px auto;
   transition: 1s;
-  opacity: 0;
+  opacity: 1;
 }
+
 
 .profile__button {
   display: block;

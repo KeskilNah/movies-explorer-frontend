@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import "./Login.css";
 import PicturePath from "../../images/logo__COLOR_main-1.svg"
 import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { emailPattern } from "../../utils/constants";
 
-export default function Login({ onLoginSubmit, isLoading, isLoggedIn }) {
+export default function Login({ onLoginSubmit, isLoading, isLoggedIn, isError, errorMessage }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
@@ -13,6 +13,7 @@ export default function Login({ onLoginSubmit, isLoading, isLoggedIn }) {
   const [isPasswordError, setPasswordError] = useState("");
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
+  const [isLoginMessage, setIsLoginMessage] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,6 +22,13 @@ export default function Login({ onLoginSubmit, isLoading, isLoggedIn }) {
       navigate("/")
     }
   }, [isLoggedIn, navigate])
+
+  useEffect(() => {
+    if(isError){
+      setIsLoginMessage(`Что-то пошло не так`)
+    }
+    else (setIsLoginMessage(""))
+  }, [isError])
 
   useEffect(() => {
     setIsFormValid(isEmailError && isPasswordError);
@@ -41,6 +49,7 @@ export default function Login({ onLoginSubmit, isLoading, isLoggedIn }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onLoginSubmit({email, password});
+    console.log(isError)
   }
 
   return(
@@ -78,6 +87,7 @@ export default function Login({ onLoginSubmit, isLoading, isLoggedIn }) {
           required
           />
         <p className={`login__password-error ${!isPasswordError ? "login__password-error__visible" : ""}`}>{passwordErrorMessage}</p>
+        <p className="login__error">{isLoginMessage}</p>
         <button className="login__button" disabled={!isFormValid || isLoading}>Войти</button>
       </form>
       <div className="login__links">

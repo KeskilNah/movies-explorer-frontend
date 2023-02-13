@@ -14,11 +14,11 @@ export default function Profile(props) {
   const [profileSavedMessage, setProfileSavedMessage] = useState("")
   const [isEmailError, setEmailError] = useState(false);
   const [isNameError, setIsNameError] = useState(false)
-  // const [isButtonDisabled, setIsButtonDisabled] = useState(false)
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true)
+  const [isValuesChanged, setIsValueChanged] = useState(false)
 
   useEffect(() => {
-    setIsFormValid(isEmailError && isNameError);
-    console.log(isEmailError, isNameError)
+    setIsFormValid((!isEmailError && !isNameError));
   }, [isEmailError, isNameError, newName, newEmail]);
 
   useEffect(() => {
@@ -27,9 +27,9 @@ export default function Profile(props) {
   }, [currentUser.name, currentUser.email])
 
   useEffect(() => {
-    if(currentUser.name === newName && currentUser.email === newEmail) {
-      setIsValueChanged(false)
-    } else (setIsValueChanged(true))
+    if(currentUser.name !== newName || currentUser.email !== newEmail) {
+      setIsValueChanged(true)
+    } else (setIsValueChanged(false))
   }, [newName, newEmail, currentUser.name, currentUser.email])
 
   const buttonEditClass = inputsDisabled ? `profile__button_hidden` : ``;
@@ -38,29 +38,31 @@ export default function Profile(props) {
 
   const handleEditButton = () => {
     setInputDisabled(false);
+    setProfileSavedMessage("")
   }
 
   const handleSaveButton = () => {
     setInputDisabled(true);
     props.onProfileEdit({name: newName, email: newEmail})
-    setProfileSavedMessage("Данные сохранены!")
+    if(props.isError){
+      setProfileSavedMessage("Что-то пошло не так")
+    } else (setProfileSavedMessage("Данные сохранены!"))
   }
 
   const handleChangeEmail = (e) => {
     setNewEmail(e.target.value)
-    setEmailError(e.target.validity.valid);
-    console.log(`isFormValid =${isFormValid}`)
-    console.log(`isLading = ${props.isLoading}`)
-    console.log(`isValuesChanged = ${isValuesChanged}`)
+    setEmailError(!e.target.validity.valid);
   }
   const handleChangeName = (e) => {
     setNewName(e.target.value)
-    setIsNameError(e.target.validity.valid);
+    setIsNameError(!e.target.validity.valid);
   }
-  const [isValuesChanged, setIsValueChanged] = useState(false)
+  
 
-  const isButtonDisabled = (!isValuesChanged || !isFormValid) || props.isLoading;
-  console.log(isButtonDisabled)
+
+  useEffect(() => {
+    setIsButtonDisabled(!(isValuesChanged && isFormValid))
+  }, [isValuesChanged, isFormValid, newName, newEmail, currentUser.name, currentUser.email])
   return(
 
     <>
@@ -98,8 +100,19 @@ export default function Profile(props) {
           </div>
           <div className={`underline underline_grey ${underlineClass}`}></div>
           <p className="profile__message">{profileSavedMessage}</p>
-          <button type="button" className={`profile__edit profile__button ${buttonSaveClass}`} onClick={handleEditButton}>Редактировать</button>
-          <button type="button" className={`profile__edit profile__button ${buttonEditClass}`} onClick={handleSaveButton} disabled={isButtonDisabled }>Сохранить</button>
+          <button
+          type="button"
+          className={`profile__edit profile__button
+          ${buttonSaveClass}`}
+          onClick={handleEditButton}>Редактировать</button>
+          <button
+            type="button"
+            className={`profile__edit profile__button ${buttonEditClass}`}
+            onClick={handleSaveButton}
+            disabled={isButtonDisabled}
+          >
+            Сохранить
+            </button>
           <button type="button" className="profile__signout" onClick={props.onLogout}>Выйти из аккаунта</button>
         </div>
         </section>
