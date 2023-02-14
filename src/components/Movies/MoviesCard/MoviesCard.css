@@ -1,0 +1,91 @@
+.card {
+  list-style-type: none;
+  border-radius: 10px;
+  background-color: #222222;
+  min-width: 270px;
+  max-width: 340px;
+  box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+@media screen and (max-width: 1279px) {
+  .card {
+    margin: 0 auto 20px;
+    width: 340px;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .card {
+    width: 500px;
+  }
+}
+
+
+@media screen and (max-width: 769px) {
+  .card {
+    width: 340px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .card {
+    width: 300px;
+  }
+}
+
+
+.card__image {
+  width: 100%;
+  height: 150px;
+  align-self: center;
+  object-fit: cover;
+}
+
+.card__description {
+  display: grid;
+  padding: 14px 12px;
+  grid-template-columns: 1fr max-content;
+  position: relative;
+}
+
+.card__title {
+  display: inline-block;
+  overflow-wrap: anywhere;
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 16px;
+  padding-right: 10px;
+}
+
+.card__save-button {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  border: 2px solid #FFF;
+  background-color: #313131;
+  cursor: pointer;
+}
+
+.card__delete-button {
+  height: 16px;
+  width: 16px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+  background: url(../../../images/icons/icon-delete.svg) no-repeat center;
+}
+
+.card__save-button_active {
+  background-color: #2BE080;
+}
+
+.card__duration {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 13px; 
+  color:#8B8B8B;
+}
+
