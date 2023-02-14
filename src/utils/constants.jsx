@@ -13,6 +13,7 @@ export const initialCards = [
     movieId: "",
     nameRU: "",
     nameEN: "",
+    _id: "1",
   },
   {
     name: "Человек-паук 2",
@@ -28,6 +29,7 @@ export const initialCards = [
     movieId: "",
     nameRU: "",
     nameEN: "",
+    _id: "2",
   },
   {
     name: "Человек-паук 3: Враг в отражении",
@@ -43,6 +45,7 @@ export const initialCards = [
     movieId: "",
     nameRU: "",
     nameEN: "",
+    _id: "3",
   },
   {
     name: "Новый Человек-паук",
@@ -58,6 +61,7 @@ export const initialCards = [
     movieId: "",
     nameRU: "",
     nameEN: "",
+    _id: "4",
   },
   {
     name: "Новый Человек-паук: Высокое напряжение",
@@ -73,6 +77,7 @@ export const initialCards = [
     movieId: "",
     nameRU: "",
     nameEN: "",
+    _id: "5",
   },
   {
     name: "Человек-паук: Возвращение домой",
@@ -88,6 +93,7 @@ export const initialCards = [
     movieId: "",
     nameRU: "",
     nameEN: "",
+    _id: "6",
   },
   {
     name: "Человек-паук: Через вселенные",
@@ -103,6 +109,7 @@ export const initialCards = [
     movieId: "",
     nameRU: "",
     nameEN: "",
+    _id: "7",
   },
   {
     name: "Человек-паук: Вдали от дома",
@@ -118,6 +125,7 @@ export const initialCards = [
     movieId: "",
     nameRU: "",
     nameEN: "",
+    _id: "8",
   },
   {
     name: "Человек-паук: Нет пути домой",
@@ -133,5 +141,35 @@ export const initialCards = [
     movieId: "",
     nameRU: "",
     nameEN: "",
+    _id: "9",
   },
 ];
+
+export const MainOptions = {
+  url: "https://api.super.movies.nomoredomains.club",
+  headers: {
+    "Content-Type": "application/json",
+  },
+};
+
+export const MoviesOptions = {
+  url: "https://api.nomoreparties.co/",
+}
+
+export const ShortDuration = 40;
+
+export const resolutions = {
+  laptopL: 1280,
+  laptop: 1200,
+  tablet: 776,
+
+}
+
+export const maxCardNumber = {
+  laptopLMaxCards: 12,
+  laptopMaxCards: 9,
+  tabletMaxCards: 8,
+  mobileDeviceMaxCards: 5,
+}
+
+export const emailPattern = `[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$`

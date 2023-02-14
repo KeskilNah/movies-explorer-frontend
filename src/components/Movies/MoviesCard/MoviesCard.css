@@ -8,6 +8,13 @@
   overflow: hidden;
 }
 
+/* .card:not(:nth-child(-n + 8)){
+  display: none;
+} */
+.hidden {
+  display: none;
+}
+
 @media screen and (max-width: 1279px) {
   .card {
     margin: 0 auto 20px;
